@@ -1,7 +1,8 @@
 jquery.reversible
 =================
 
-A jQuery plugin that allows an animation to be run backwards to its original state.
+A jQuery plugin that assists in the creation of reversible animations. Animations created using .addAnimation can 
+be reverted using .animateBack.
 
 
 ###Example usage:
