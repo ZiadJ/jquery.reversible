@@ -6,11 +6,11 @@
         ///<summary>Creates an animation with a specific key that can be applied using the 
         /// animate funtion or undone using the animateBack function. 
         /// Usage examples:
-        ///     .addAnimation('animBorder', 'borderStyle', 'solid', {}, function(){ return $(this).css('borderStyle') == ''; })
-        ///     .addAnimation('animBorder', 'borderWidth', 1) // a number is ok but a string without the 'px' is not.
         ///     .addAnimation('animStretch', 'padding', '+=5')
         ///     .addAnimation('animStretch', 'width', ['+=5', '+=10'], { delay: 'after', animationTime: 100 })
         ///     .addAnimation('animBorder', 'borderRadius', '5,10,15,20', { delay: 100 }) // animationTime automatically fits animation time when not specified.
+        ///     .addAnimation('animBorder', 'borderStyle', 'solid', function() { return $(this).css('borderStyle') == ''; })
+        ///     .addAnimation('animBorder', 'borderWidth', 1) // a number is ok but a string without the 'px' is not.
         ///     .addAnimation('animBg', 'backgroundColor', '#00AA55') // requires the jQuery.color plugin.
         ///</summary>  
         addAnimation(key, property, value, options, condition, false);
@@ -23,11 +23,11 @@
         /// Usage examples:
         ///    var prop = {};
         ///    $(prop)
-        ///     .addAnimation('animBorder', 'borderStyle', 'solid', {}, function(){ return $(this).css('borderStyle') == ''; })
-        ///     .addAnimation('animBorder', 'borderWidth', 1) // a number is ok but a string without the 'px' is not.
         ///     .addAnimation('animStretch', 'padding', '+=5')
         ///     .addAnimation('animStretch', 'width', ['+=5', '+=10'], { delay: 'after', animationTime: 100 })
         ///     .addAnimation('animBorder', 'borderRadius', '5,10,15,20', { delay: 100 }) // animationTime automatically fits animation time when not specified.
+        ///     .addAnimation('animBorder', 'borderStyle', 'solid', function() { return $(this).css('borderStyle') == ''; })
+        ///     .addAnimation('animBorder', 'borderWidth', 1) // never use '1' without the 'px';
         ///     .addAnimation('animBg', 'backgroundColor', '#00AA55') // requires the jQuery.color plugin.
         ///</summary>        
         addAnimation(key, property, value, options, condition, false, this);
