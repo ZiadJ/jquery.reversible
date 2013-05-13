@@ -6,8 +6,8 @@
         ///<summary>Creates an animation with a specific key that can be applied using the 
         /// animate funtion or undone using the animateBack function. 
         /// Usage examples:
-        ///    $.addAnimation('animBorder', 'border', 'solid')
-        ///     .addAnimation('animBorder', 'borderWidth', 1) // never use '1' without the 'px';
+        ///     .addAnimation('animBorder', 'borderStyle', 'solid', {}, function(){ return $(this).css('borderStyle') == ''; })
+        ///     .addAnimation('animBorder', 'borderWidth', 1) // a number is ok but a string without the 'px' is not.
         ///     .addAnimation('animStretch', 'padding', '+=5')
         ///     .addAnimation('animStretch', 'width', ['+=5', '+=10'], { delay: 'after', animationTime: 100 })
         ///     .addAnimation('animBorder', 'borderRadius', '5,10,15,20', { delay: 100 }) // animationTime automatically fits animation time when not specified.
@@ -23,9 +23,8 @@
         /// Usage examples:
         ///    var prop = {};
         ///    $(prop)
-        ///     .addAnimation('animBorder', 'border', 'solid')
         ///     .addAnimation('animBorder', 'borderStyle', 'solid', {}, function(){ return $(this).css('borderStyle') == ''; })
-        ///     .addAnimation('animBorder', 'borderWidth', 1) // never use '1' without the 'px';
+        ///     .addAnimation('animBorder', 'borderWidth', 1) // a number is ok but a string without the 'px' is not.
         ///     .addAnimation('animStretch', 'padding', '+=5')
         ///     .addAnimation('animStretch', 'width', ['+=5', '+=10'], { delay: 'after', animationTime: 100 })
         ///     .addAnimation('animBorder', 'borderRadius', '5,10,15,20', { delay: 100 }) // animationTime automatically fits animation time when not specified.
