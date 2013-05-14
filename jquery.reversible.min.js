@@ -1,0 +1,35 @@
+(function(e){var b={};e.addAnimation=function(g,i,h,f,j){c(g,i,h,f,j,false);
+return this};e.fn.addAnimation=function(g,i,h,f,j){c(g,i,h,f,j,false,this);
+return this};var d=RegExp("([A-Z])");var c=function(p,o,m,r,f,q,j){if(e.isFunction(r)){j=f;
+f=r;r={}}else{r=r||{}}if(q!==true){var l=o.replace(d,"-$1").split("-");
+if(l.length<2){l.push("")}if(["margin","padding","border"].indexOf(l[0].toLowerCase())>-1){
+var n=typeof m==="string"?m.split(","):m instanceof Array?m:[m];
+boxPropSuffix=l[1].toLowerCase()==="radius"?
+["TopLeft","TopRight","BottomRight","BottomLeft"]:["Top","Right","Bottom","Left"];
+if(n.length<4){n.push(n[0]);n.push(n[1]);
+if(n.length<4){n.push(n[0])}}for(var h=0;
+h<boxPropSuffix.length;h++){c(p,l[0]+boxPropSuffix[h]+(l[1]||""),n[h],r,f,true,j)
+}return this}}var g={value:m,options:r||{},condition:f};
+if(j){if(j.data){var k=e(j).data(p)||{};k[o]=g;
+e(j).data(p,k)}else{if(j[p]===undefined){j[p]={}
+}j[p][o]=g}}else{if(b[p]===undefined){b[p]={}
+}b[p][o]=g}return this};var a=RegExp("s[A-z]+s");
+e.fn._animate=e.fn.animate;e.fn.animate=function(h,i,j,g){if(typeof h!=="string"){return this._animate(h,i,j,g)
+}var f=h.split(",");return this.each(function(){var u={},t={},m={};
+var q={},k={};var p=e(this);var r,n;for(var o=0;
+o<f.length;o++){r=p.data(f[o].trim())||b[f[o].trim()];
+for(var l in r){var s=p.css(l),n=r[l];if(n.condition){if(!n.condition.call(this,s)){break
+}}if(!a.test(" "+n.value.toString()+" ")&&(n.options.duration===undefined||n.options.duration>0)){k[l]=s;
+if(n.options.duration||n.options.delay){t[l]=n
+}else{u[l]=n.value}}else{q[l]=s;m[l]=n}}p.data("beforeAnim_"+f[o].trim(),{textual:q,numeric:k})
+}for(var l in m){var n=m[l];if(n.options.delay){setTimeout(function(){p.css(l,n.value)
+},n.options.delay=="after"?i:n.options.delay)
+}else{p.css(l,n.value)}}p._animate(u,i,j,g);
+for(var l in t){var n=t[l];setTimeout(function(){
+p._animate({prop:n.value},(n.options.duration||"")==="autoFit"?(i-n.options.delay):n.options.duration,j,g)
+},n.options.delay=="after"?i:n.options.delay)
+}})};e.fn.animateBack=function(f,h,i,g){return this.each(function(){var n=e(this);
+var j,k;var m=f.split(",");for(var l=0;l<m.length;
+l++){k="beforeAnim_"+m[l].trim();j=e.extend(true,j,n.data(k));
+n.data(k,"")}if(j){for(var o in j.textual){n.css(o,j.textual[o])
+}return n._animate(j.numeric,h,i,g)}})}})(jQuery);
