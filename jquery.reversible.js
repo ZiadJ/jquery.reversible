@@ -7,8 +7,8 @@
         /// animate funtion or undone using the animateBack function. 
         /// Usage examples:
         ///     .addAnimation('animStretch', 'padding', '+=5')
-        ///     .addAnimation('animStretch', 'width', ['+=5', '+=10'], { delay: 'after', animationTime: 100 })
-        ///     .addAnimation('animBorder', 'borderRadius', '5,10,15,20', { delay: 100 }) // animationTime automatically fits animation time when not specified.
+        ///     .addAnimation('animStretch', 'width', ['+=5', '+=10'], { delay: 'after', duration: 100 }) // delay animation until end of the main animation.
+        ///     .addAnimation('animBorder', 'borderRadius', '5,10,15,20', { delay: 100, duration: 'autoFit' }) // auto fit duration to animation time.
         ///     .addAnimation('animBorder', 'borderStyle', 'solid', function() { return $(this).css('borderStyle') == ''; })
         ///     .addAnimation('animBorder', 'borderWidth', 1) // a number is ok but a string without the 'px' is not.
         ///     .addAnimation('animBg', 'backgroundColor', '#00AA55') // requires the jQuery.color plugin.
@@ -18,18 +18,6 @@
     }
 
     $.fn.addAnimation = function (key, property, value, options, condition) {
-        ///<summary>Adds an animation with a specific key to an object that can be applied using the 
-        /// animate funtion or undone using the animateBack function. 
-        /// Usage examples:
-        ///    var prop = {};
-        ///    $(prop)
-        ///     .addAnimation('animStretch', 'padding', '+=5')
-        ///     .addAnimation('animStretch', 'width', ['+=5', '+=10'], { delay: 'after', animationTime: 100 })
-        ///     .addAnimation('animBorder', 'borderRadius', '5,10,15,20', { delay: 100 }) // animationTime automatically fits animation time when not specified.
-        ///     .addAnimation('animBorder', 'borderStyle', 'solid', function() { return $(this).css('borderStyle') == ''; })
-        ///     .addAnimation('animBorder', 'borderWidth', 1) // never use '1' without the 'px';
-        ///     .addAnimation('animBg', 'backgroundColor', '#00AA55') // requires the jQuery.color plugin.
-        ///</summary>        
         addAnimation(key, property, value, options, condition, false, this);
         return this;
     }
@@ -143,11 +131,11 @@
 
                     // Only numerical values with durations more than zero are set using $.animate().
                     if (!rgxHasWordWithNoDigit.test(' ' + anim.value.toString() + ' ')
-                        && (anim.options.animationTime === undefined || anim.options.animationTime > 0)) {
+                        && (anim.options.duration === undefined || anim.options.duration > 0)) {
 
                         numericCssBeforeAnimation[prop] = value; // Backup animatable value.
 
-                        if (anim.options.animationTime || anim.options.delay)
+                        if (anim.options.duration || anim.options.delay)
                             delayedAnimations[prop] = anim; // Add to delayed animations object.
                         else
                             animations[prop] = anim.value; // Add to synchronous animations object.
@@ -187,7 +175,7 @@
                 setTimeout(function () {
                     $this._animate(
                         { prop: anim.value },
-                        anim.options.animationTime ? anim.options.animationTime : animationTime - anim.options.delay,
+                        (anim.options.duration || '') === 'autoFit' ? (animationTime - anim.options.delay) : anim.options.duration,
                         easing,
                         callBack);
                 }, anim.options.delay == 'after' ? animationTime : anim.options.delay);
